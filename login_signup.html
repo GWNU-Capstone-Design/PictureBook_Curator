@@ -15,7 +15,7 @@
         <input type="email" id="loginEmail" placeholder="이메일" required>
         <input type="password" id="loginPassword" placeholder="비밀번호" required>
         <button type="submit">로그인</button>
-        <p>아직 회원이 아니신가요? <span id="showSignUp">회원가입</span></p>
+        <p><span id="findPW">비밀번호찾기</span> <span id="showSignUp">회원가입</span></p>
     </form>
 
     <form id="signupForm" style="display:none;">
@@ -26,6 +26,13 @@
         <input type="password" id="signupPasswordConfirm" placeholder="비밀번호 확인" required>
         <button type="submit">회원가입</button>
         <p>이미 회원이신가요? <span id="showLogin">로그인</span></p>
+    </form>
+
+    <form id="findForm" style="display:none;">
+        <h2>비밀번호찾기</h2>
+        <input type="email" id="signupEmail" placeholder="이메일" required>
+        <button type="submit">비밀번호 찾기</button>
+        <p>다시 로그인하기  <span id="showLogin">로그인</span></p>
     </form>
 </div>
 

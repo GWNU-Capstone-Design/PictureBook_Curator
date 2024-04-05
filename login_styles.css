@@ -47,9 +47,12 @@ form h2 {
 
 form p {
     text-align: center;
+    display: flex;
+    justify-content: space-between; /* 양쪽 끝에 요소들을 정렬합니다 */
 }
 
-#showSignUp, #showLogin {
+
+#showSignUp, #showLogin, #findPW {
     color: #3f51b5;
     cursor: pointer;
 }
