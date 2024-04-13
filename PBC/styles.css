@@ -23,6 +23,25 @@ body {
     .background-image {
         background-size: contain; /* 이미지가 전체 화면을 덮지 않고 비율 유지 */
     }
+
+    header {
+        padding: 10px; /* 화면이 작을 때 헤더의 패딩 조정 */
+    }
+
+    /* 아이콘 크기와 위치 조정 */
+    .back-button img,
+    .search-button img,
+    .bookmark-button img {
+        width: 20px; /* 아이콘 크기를 줄임 */
+    }
+
+    .back-button {
+        left: 10px; /* 뒤로가기 버튼 위치 조정 */
+    }
+
+    .top-right-buttons {
+        margin-right: 10px; /* 우측 버튼 그룹 간격 조정 */
+    }
 }
 
 @media (max-width: 480px) { /* 화면 너비가 480px 이하인 경우 */
@@ -33,7 +52,7 @@ body {
 
 header, footer {
     background-color: rgba(255, 255, 255, 0.8); /* 투명도가 있는 배경색 */
-    padding: 15px;
+    padding: 10px; /* 헤더의 패딩을 조정하여 크기를 줄임 */
     display: flex;
     justify-content: space-between;
     align-items: center;
