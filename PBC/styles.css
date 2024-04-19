@@ -16,6 +16,7 @@ body {
     background-image: url('testpicture.jpg'); /* 배경 이미지 경로 입력 */
     background-size: cover;
     z-index: -1;
+    background-repeat: no-repeat;
 }
 
 /* 미디어 쿼리를 사용하여 화면 크기에 따라 이미지 크기 조절 */
