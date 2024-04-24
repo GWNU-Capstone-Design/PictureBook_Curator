@@ -550,6 +550,11 @@ with tf.Session() as sess:
         if (epoch + 1) % display_step == 0:
             print('After ', (epoch + 1), 'iterations: Cost = ', total_cost / m, 'and Accuracy: ', total_acc * 100/ m , '%' )
 
+        if total_acc * 100/ m >= 95:
+          break
+    saver = tf.train.Saver()
+    saver.save(sess, "/content/drive/MyDrive/model/test")
+
     # 훈련 완료
     print('최적화 완료!')
     print("테스트 시작")
