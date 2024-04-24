@@ -1,0 +1,123 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* 가로 스크롤 방지 */
+}
+
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-image: url('testpicture.jpg'); /* 배경 이미지 경로 입력 */
+    background-size: cover;
+    z-index: -1;
+    background-repeat: no-repeat;
+}
+
+/* 미디어 쿼리를 사용하여 화면 크기에 따라 이미지 크기 조절 */
+@media (max-width: 768px) { /* 화면 너비가 768px 이하인 경우 */
+    .background-image {
+        background-size: contain; /* 이미지가 전체 화면을 덮지 않고 비율 유지 */
+    }
+
+    header {
+        padding: 10px; /* 화면이 작을 때 헤더의 패딩 조정 */
+    }
+
+    /* 아이콘 크기와 위치 조정 */
+    .back-button img,
+    .search-button img,
+    .bookmark-button img {
+        width: 20px; /* 아이콘 크기를 줄임 */
+    }
+
+    .back-button {
+        left: 10px; /* 뒤로가기 버튼 위치 조정 */
+    }
+
+    .top-right-buttons {
+        margin-right: 10px; /* 우측 버튼 그룹 간격 조정 */
+    }
+}
+
+@media (max-width: 480px) { /* 화면 너비가 480px 이하인 경우 */
+    .background-image {
+        background-size: auto; /* 이미지 크기를 원본 비율로 유지 */
+    }
+}
+
+header, footer {
+    background-color: rgba(255, 255, 255, 0.8); /* 투명도가 있는 배경색 */
+    padding: 10px; /* 헤더의 패딩을 조정하여 크기를 줄임 */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+}
+
+footer {
+    bottom: 0;
+}
+
+.back-button,
+.bookmark-button,
+.search-button,
+.voice-button,
+.brightness-button,
+.pin-button,
+.settings-button,
+.footer-icon {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 24px; /* 아이콘 크기 */
+    padding: 8px; /* 아이콘 버튼 내부 간격 */
+    margin: 0 10px; /* 아이콘 간의 간격 조절 */
+}
+
+.top-right-buttons {
+    display: flex;
+    align-items: center; /* 아이콘 세로 중앙 정렬 추가 */
+}
+
+.top-right-buttons button {
+    margin-left: 10px;
+    padding: 8px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.7); /* 투명도가 있는 배경색 */
+    cursor: pointer;
+}
+
+/* 하단 아이콘 버튼 컨테이너 스타일 */
+.footer-icons-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-around;
+    width: 80%; /* 컨테이너 너비 설정 */
+    max-width: 400px; /* 최대 너비 설정 */
+}
+
+/* 하단 아이콘 버튼 공통 스타일 */
+.footer-icon {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 24px; /* 아이콘 크기 */
+    padding: 8px; /* 아이콘 버튼 내부 간격 */
+}
+
+/* 각 하단 아이콘 이미지 스타일 */
+.footer-icon img {
+    width: 20px; /* 아이콘 이미지 크기 조정 */
+    height: 20px;
+    vertical-align: middle; /* 이미지 세로 정렬 추가 */
+}
