@@ -73,6 +73,6 @@ http://39.125.174.224:8080/PictureBook_Curator_war_exploded/
 ### Branch : JHJ
 - **picturebook.sql** : DB 테이블 생성 sql
 
-### main
+### Branch : main
 - **한글학습자료1.zip** : 이미지캡셔닝을 위한 한글학습자료 
 - **한글학습자료2.zip** : 이미지캡셔닝을 위한 한글학습자료
