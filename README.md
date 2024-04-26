@@ -45,7 +45,7 @@ http://39.125.174.224:8080/PictureBook_Curator_war_exploded/
 - **웹** : VScode
 - **TTS** : Google TTS
 
-## 🗨️ 코드 설명
+## 🗨️ 파일 설명
 ### Branch: SYS
 - **web/css/login_style.css** : 
 - **web/css/style.css** : 
