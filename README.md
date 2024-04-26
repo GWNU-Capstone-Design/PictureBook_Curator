@@ -46,7 +46,34 @@ http://39.125.174.224:8080/PictureBook_Curator_war_exploded/
 - **TTS** : Google TTS
 
 ## 🗨️ 파일 설명
-### Branch: SYS
-- **web/css/login_style.css** : 
-- **web/css/style.css** : 
-- **
+### Branch : SYS (Branch : JJY)
+- **web/css/login_style.css** : Find_pw.html, Reset_pw.html, SignUp.html, index.html, verificationCode.html 스타일 적용 css
+- **web/css/style.css** : Main_Home.jsp 스타일 적용 css
+- **Find_pw.html** : 사용자 비밀번호를 찾는 인터페이스 html
+- **Find_pw_Check.jsp** : 비밀번호 찾기를 위한 jsp 파일
+- **Main_Home.jsp** : 로그인 시 보여지는 메인 페이지 
+- **Reset_pw.html** : 비밀번호 재설정 페이지
+- **Reset_pw.jsp** : 비밀번호 재설정을 위한 jsp 파일
+- **SignUp.html** : 회원가입 페이지
+- **Signup_Check.jsp** :  회원가입을 확인하는 jsp 파일
+- **index.html** : 링크 접속 시 보여지는 로그인 페이지 (가장 첫 번째 페이지)
+- **login_Check.jsp** : 로그인 시도를 위한 jsp 파일
+- **test.jpg** : 테스트를 위해 입력한 이미지
+- **verificationCode.html** : 이메일 인증 페이지
+- **vierifacationCode.jsp** : 이메일 인증을 위한 jsp 파일
+
+### Branch : KTK
+- **Image_Captioning_test.py** : 
+- **Image_Comment.py** :
+- **imagefile_chageCSV.py** : 
+
+### Branch : SJH
+- **index.html** : 저장된 그림책 선택 시 보여지는 UI
+- **style.css** : index.html 스타일 적용 css
+
+### Branch : JHJ
+- **picturebook.sql** : DB 테이블 생성 sql
+
+### main
+- **한글학습자료1.zip** : 이미지캡셔닝을 위한 한글학습자료 
+- **한글학습자료2.zip** : 이미지캡셔닝을 위한 한글학습자료
