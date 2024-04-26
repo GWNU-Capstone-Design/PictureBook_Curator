@@ -16,7 +16,7 @@
     <span class="icon settings-icon"></span>
   </div>
 </div>
-
+<!-- HTML -->
 <div class="sorting-tabs">
   <div class="tab">날짜</div>
   <div class="tab">이름</div>
@@ -25,8 +25,21 @@
 
 <div class="main-content">
   <div class="add-book">+</div>
+</div>
 
-  <!-- Books will be added here -->
+<div id="addBookModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <form id="bookForm">
+      <label for="bookCover">책 표지:</label>
+      <input type="file" id="bookCover" accept="image/*" onchange="previewCover(this.files)">
+      <div id="coverPreview"></div><br>
+      <label for="bookContent">책 내용:</label>
+      <input type="file" id="bookContent" accept="image/*" multiple onchange="previewContent(this.files)">
+      <div id="contentPreview"></div><br>
+      <button type="submit">책 추가</button>
+    </form>
+  </div>
 </div>
 
 <script src="scripts.js"></script>
