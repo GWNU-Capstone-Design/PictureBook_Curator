@@ -23,13 +23,21 @@
         </div>
     </header>
 
-    <!-- 아래 부분은 푸터 -->
-    <footer>
-        <!-- 푸터 아이콘 버튼들 (PNG 이미지) -->
-        <button class="footer-icon"><img src="voice.png" alt="Voice"></button>
-        <button class="footer-icon"><img src="brightness.png" alt="Brightness"></button>
-        <button class="footer-icon"><img src="pin.png" alt="Pin"></button>
-        <button class="footer-icon"><img src="settings.png" alt="Settings"></button>
-    </footer>
+<!-- 아래 부분은 푸터 -->
+<footer>
+    <!-- 푸터 아이콘 버튼들 (PNG 이미지) -->
+    <button class="footer-icon" id="voiceIcon"><img src="voice.png" alt="Voice"></button>
+    <button class="footer-icon brightness-control" id="brightnessIcon"><img src="brightness.png" alt="Brightness"></button>
+    <button class="footer-icon" id="pinIcon"><img src="pin.png" alt="Pin"></button>
+    <button class="footer-icon" id="settingsIcon"><img src="settings.png" alt="Settings"></button>
+</footer>
+
+    <!-- 밝기 조절 UI -->
+    <div class="brightness-control-container">
+        <input type="range" min="0" max="100" value="100" class="brightness-slider">
+        <button class="brightness-reset-button">기본 값으로 초기화</button>
+    </div>
+
+    <script src="script.js"></script> <!-- JavaScript 파일 연결 -->
 </body>
 </html>
