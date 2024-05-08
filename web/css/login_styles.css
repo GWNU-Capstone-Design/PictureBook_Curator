@@ -112,15 +112,29 @@ body {
     text-decoration: underline;
 }
 
-#findPW,
-#showSignUp {
-    font-family: 'yangjin', sans-serif; /* 원하는 글자체 설정 */
+#findPW, #showSignUp {
+    font-family: 'yangjin', sans-serif;
 }
 
 #findPW {
-    margin-right: 100px; /* 비밀번호 찾기 링크의 오른쪽 마진 설정 */
+    margin-right: 100px;
 }
 
 #showSignUp {
-    margin-left: 100px; /* 회원가입 링크의 왼쪽 마진 설정 */
+    margin-left: 100px;
+}
+
+#signupForm p, #findForm p {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+#showLogin, #showLoginFromFind {
+    font-family: 'yangjin', sans-serif;
+    margin-left: 50px;
+}
+
+#showLogin:hover, #showLoginFromFind:hover {
+    text-decoration: underline;
 }
