@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Captioning</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            text-align: center;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Captioning</h1>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" accept="image/*" required>
+        <input type="submit" value="Upload and Generate Caption">
+    </form>
+
+    {% if caption %}
+        <div class="result">
+            <img src="{{ image_path }}" alt="Uploaded Image" width="300">
+            <h3>Generated Caption:</h3>
+            <p>{{ caption }}</p>
+        </div>
+    {% endif %}
+</body>
+</html>
