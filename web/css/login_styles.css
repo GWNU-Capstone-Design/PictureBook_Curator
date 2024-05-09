@@ -5,6 +5,7 @@
     font-weight: normal;
     font-style: normal;
 }
+
 * {
     margin: 0;
     padding: 0;
@@ -18,19 +19,20 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    min-width: 80vh;
     background: white;
 }
 
 .image img {
     display: block;
-    width: 400px;
+    width: 90%; /* 이미지 너비를 화면 너비의 90%로 설정 */
+    max-width: 400px; /* 최대 이미지 너비를 400px로 설정 */
     margin: 0 auto;
     margin-bottom: 30px;
 }
 
 .wrapper {
-    width: 400px;
+    width: 90%; /* wrapper 너비를 화면 너비의 90%로 설정 */
+    max-width: 400px; /* 최대 wrapper 너비를 400px로 설정 */
     background: rgba(197, 202, 233, 0.4);
     color: #fff;
     border-radius: 10px;
@@ -99,6 +101,7 @@ body {
     font-size: 14.5px;
     text-align: center;
     margin: 20px 0 15px;
+    justify-content: center; /* 가운데 정렬 */
 }
 
 .register-link p {
@@ -147,4 +150,14 @@ body {
 
 #showLogin:hover, #showLoginFromFind:hover {
     text-decoration: underline;
+}
+
+/* 미디어 쿼리 추가 */
+@media screen and (max-width: 400px) {
+    .image img {
+        width: 80%; /* 작은 화면 크기일 때 이미지 너비를 화면 너비의 80%로 설정 */
+    }
+    .wrapper {
+        width: 80%; /* 작은 화면 크기일 때 wrapper 너비를 화면 너비의 80%로 설정 */
+    }
 }
