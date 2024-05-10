@@ -41,7 +41,7 @@ body {
     border: 2px solid rgba(255, 222, 233, .1);
 }
 
-.wrapper h1 {
+.wrapper h1, #re, #find {
     font-size: 30px;
     text-align: center;
     font-family: 'yangjin', sans-serif;
@@ -159,5 +159,10 @@ body {
     }
     .wrapper {
         width: 80%; /* 작은 화면 크기일 때 wrapper 너비를 화면 너비의 80%로 설정 */
+    }
+    #findPW, #showSignUp, #showLoginFromFind, #showLogin, #re, #find {
+        display: inline-block;
+        margin-right: 10px;
+        margin-left: 10px;
     }
 }
