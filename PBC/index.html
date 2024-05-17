@@ -4,41 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PictureBook</title>
-    <link rel="stylesheet" href="styles.css"> <!-- CSS 파일 연결 -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- 전체 배경 이미지 설정 -->
     <div class="background-image"></div>
 
     <header>
-        <!-- 뒤로가기 버튼 (PNG 아이콘) -->
-        <button class="back-button"><img src="back.png" alt="Back"></button>
-    
-        <!-- 우측 버튼 그룹 -->
+        <button class="back-button" onclick="goBack();"><img src="back.png" alt="Back"></button>
         <div class="top-right-buttons">
-            <!-- 검색 아이콘 (PNG 이미지) -->
             <button class="search-button"><img src="search.png" alt="Search"></button>
-            <!-- 북마크 아이콘 (PNG 이미지) -->
             <button class="bookmark-button"><img src="bookmark.png" alt="Bookmark"></button>
         </div>
     </header>
 
     <footer>
-        <!-- 기존 아이콘들 -->
         <button class="footer-icon" id="voiceIcon"><img src="voice.png" alt="Voice"></button>
-        <button class="footer-icon brightness-control" id="brightnessIcon"><img src="brightness.png" alt="Brightness"></button>
+        <button class="footer-icon" id="brightnessIcon"><img src="brightness.png" alt="Brightness"></button>
         <button class="footer-icon" id="pinIcon"><img src="pin.png" alt="Pin"></button>
         <button class="footer-icon" id="settingsIcon"><img src="settings.png" alt="Settings"></button>
-        <!-- 복원 버튼 -->
         <button class="footer-icon" id="restoreButton" style="display: none;"><img src="restore.png" alt="Restore"></button>
     </footer>
 
-    <!-- 밝기 조절 UI -->
-    <div class="brightness-control-container">
-        <input type="range" min="0" max="100" value="100" class="brightness-slider">
-        <button class="brightness-reset-button">기본 값으로 초기화</button>
+    <!-- 밝기 조절 모달 -->
+    <div id="brightnessModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <input type="range" min="0" max="100" value="50" class="brightness-slider">
+        </div>
     </div>
 
-    <script src="script.js"></script> <!-- JavaScript 파일 연결 -->
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <ul class="settings-list">
+                <li class="setting">
+                    <span>스크롤 모드</span>
+                    <label class="switch">
+                        <input type="checkbox" id="scrollMode">
+                        <span class="slider round"></span>
+                    </label>
+                </li>
+                <li class="setting">
+                    <span>음성 바로 출력</span>
+                    <label class="switch">
+                        <input type="checkbox" id="voiceOutput">
+                        <span class="slider round"></span>
+                    </label>
+                </li>
+                <li class="setting">
+                    <span>좌우 터치 영역</span>
+                    <label class="switch">
+                        <input type="checkbox" id="touchArea">
+                        <span class="slider round"></span>
+                    </label>
+                </li>
+                <li class="setting">
+                    <span>페이지 정보 표시</span>
+                    <label class="switch">
+                        <input type="checkbox" id="pageInfo">
+                        <span class="slider round"></span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
