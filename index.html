@@ -16,7 +16,7 @@
     <span class="icon settings-icon"></span>
   </div>
 </div>
-<!-- HTML -->
+
 <div class="sorting-tabs">
   <div class="tab">날짜</div>
   <div class="tab">이름</div>
@@ -27,21 +27,60 @@
   <div class="add-book">+</div>
 </div>
 
+<!-- Modal for adding a book -->
 <div id="addBookModal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
-    <form id="bookForm">
-      <label for="bookCover">책 표지:</label>
-      <input type="file" id="bookCover" accept="image/*" onchange="previewCover(this.files)">
-      <div id="coverPreview"></div><br>
-      <label for="bookContent">책 내용:</label>
-      <input type="file" id="bookContent" accept="image/*" multiple onchange="previewContent(this.files)">
-      <div id="contentPreview"></div><br>
-      <button type="submit">책 추가</button>
-    </form>
+    <div class="modal-body">
+      <div id="step1" class="step">
+        <h2>책 추가 - 1단계</h2>
+        <label for="bookTitle">책 제목:</label>
+        <input type="text" id="bookTitle" name="bookTitle">
+        <label for="coverImage">표지 사진:</label>
+        <input type="file" id="coverImage" name="coverImage" accept="image/*">
+        <img id="coverPreview" src="#" alt="표지 미리보기" style="display: none;">
+        <button id="nextStep">다음 단계</button>
+      </div>
+      <div id="step2" class="step" style="display: none;">
+        <h2>책 추가 - 2단계</h2>
+        <label for="contentImages">내용 사진:</label>
+        <input type="file" id="contentImages" name="contentImages" accept="image/*" multiple>
+        <div id="contentPreviewContainer"></div>
+        <button id="addBook">책 추가</button>
+      </div>
+    </div>
   </div>
 </div>
 
-<script src="scripts.js"></script>
+<!-- Viewer Modal -->
+<div id="viewerModal" class="modal">
+  <div class="modal-content viewer-content">
+    <span class="close">&times;</span>
+    <div class="viewer-header">
+      <button id="backToLibrary">돌아가기</button>
+      <h2 id="viewerTitle">책 제목</h2>
+      <button id="bookmarkPage">책갈피</button>
+    </div>
+    <div class="viewer-body">
+      <button id="prevPage" class="nav-button">⟨</button>
+      <img id="viewerImage" src="#" alt="책 이미지">
+      <button id="nextPage" class="nav-button">⟩</button>
+    </div>
+    <div class="viewer-footer">
+      <div class="page-info">
+        <span id="currentPage">1</span> / <span id="totalPages">1</span>
+      </div>
+      <div class="controls">
+        <button id="firstPage">처음으로</button>
+        <button id="rewind5s">⏪ 5</button>
+        <button id="playPause">⏯</button>
+        <button id="forward5s">5 ⏩</button>
+        <input type="range" id="volumeControl" min="0" max="100" value="50">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
