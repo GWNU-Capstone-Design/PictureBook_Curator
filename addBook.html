@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="styles.css">
+<title>책 추가</title>
+</head>
+<body>
+<div class="modal-content">
+  <div class="modal-body">
+    <div id="step1" class="step">
+      <h2>책 추가 - 1단계</h2>
+      <label for="bookTitle">책 제목:</label>
+      <input type="text" id="bookTitle" name="bookTitle">
+      <label for="coverImage">표지 사진:</label>
+      <input type="file" id="coverImage" name="coverImage" accept="image/*">
+      <img id="coverPreview" src="#" alt="표지 미리보기" style="display: none;">
+    </div>
+    <div id="step2" class="step" >
+      <h2>책 추가 - 2단계</h2>
+      <label for="contentImages">내용 사진:</label>
+      <input type="file" id="contentImages" name="contentImages" accept="image/*" multiple>
+      <div id="contentPreviewContainer"></div>
+      <button id="addBook">책 추가</button>
+    </div>
+  </div>
+</div>
+<script src="scripts.js"></script>
+</body>
+</html>
