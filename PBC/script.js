@@ -2,53 +2,59 @@ document.addEventListener("DOMContentLoaded", function() {
     var settingsIcon = document.getElementById("settingsIcon");
     var settingsModal = document.getElementById("settingsModal");
     var brightnessIcon = document.getElementById("brightnessIcon");
-    var brightnessContainer = document.querySelector(".brightness-control-container");
+    var brightnessModal = document.getElementById("brightnessModal");
+    var brightnessCloseBtn = brightnessModal.querySelector('.close');
     var pinIcon = document.getElementById("pinIcon");
     var restoreButton = document.getElementById("restoreButton");
     var header = document.querySelector("header");
     var footer = document.querySelector("footer");
 
-    // Settings Modal Controls
-    settingsIcon.onclick = function() {
-        settingsModal.style.display = "block";
-        settingsModal.classList.remove("hidden");  // 'hidden' 클래스 제거
+    // 밝기 조절 모달 토글
+    brightnessIcon.addEventListener('click', function() {
+        brightnessModal.style.display = 'block';
+    });
+
+    // 밝기 모달 닫기
+    brightnessCloseBtn.onclick = function() {
+        brightnessModal.style.display = "none";
     };
 
-    // Correct close button for the settings modal
+    // 설정 모달 토글
+    settingsIcon.onclick = function() {
+        settingsModal.style.display = "block";
+        settingsModal.classList.remove("hidden");
+    };
+
+    // 설정 모달 닫기
     var settingsCloseBtn = settingsModal.querySelector('.close');
     settingsCloseBtn.onclick = function() {
         settingsModal.style.display = "none";
-        settingsModal.classList.add("hidden");  // 'hidden' 클래스 추가
+        settingsModal.classList.add("hidden");
     };
 
+    // 모달 외부 클릭시 닫기
     window.onclick = function(event) {
         if (event.target == settingsModal) {
             settingsModal.style.display = "none";
-            settingsModal.classList.add("hidden");  // 'hidden' 클래스 추가
+            settingsModal.classList.add("hidden");
+            event.stopPropagation(); // 이벤트 버블링 방지
+        }
+        if (event.target == brightnessModal) {
+            brightnessModal.style.display = "none";
+            event.stopPropagation(); // 이벤트 버블링 방지
         }
     };
 
-    // Brightness Control Visibility
-    brightnessIcon.addEventListener("click", function() {
-        brightnessContainer.style.display = (brightnessContainer.style.display == "flex") ? "none" : "flex";
-    });
-
-    // Pin (Hide/Show UI Elements)
     pinIcon.addEventListener("click", function() {
-        header.style.display = "none";
-        footer.style.display = "none";
-        restoreButton.style.display = "block"; // Display the restore button
+        var isHidden = header.style.display === "none";
+        header.style.display = isHidden ? "flex" : "none";
+        footer.style.display = isHidden ? "flex" : "none";
+        restoreButton.style.display = isHidden ? "none" : "flex";
     });
 
-    // Restore UI Elements
     restoreButton.addEventListener("click", function() {
         header.style.display = "flex";
         footer.style.display = "flex";
-        restoreButton.style.display = "none"; // Hide the restore button again
+        restoreButton.style.display = "none";
     });
-
-    // Back button action
-    function goBack() {
-        window.history.back();
-    }
 });
