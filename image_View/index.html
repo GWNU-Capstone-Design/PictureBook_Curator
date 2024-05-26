@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PictureBook Curator</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="back-button">
+                <img src="Icon/back.png" alt="Back">
+            </button>
+            <input type="text" id="title-input" class="title-input" placeholder="책 제목을 입력하세요">
+            <button class="bookmark-button">
+                <img src="Icon/bookmark.png" alt="Bookmark">
+            </button>
+        </div>
+
+        <div id="content" class="content">
+            <!-- previous button -->
+            <button id="prev-btn" class="nav-button">
+                ⬅️
+            </button>
+
+            <!-- 책 -->
+            <div id="book" class="book">
+                <!-- paper 1 -->
+                <div id="p1" class="paper">
+                    <div class="front">
+                        <div id="f1" class="front-content">
+                            <h1>Front 1</h1>
+                        </div>
+                    </div>
+                    <div class="back">
+                        <div id="b1" class="back-content">
+                            <h1>Back 1</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- paper 2 -->
+                <div id="p2" class="paper">
+                    <div class="front">
+                        <div id="f2" class="front-content">
+                            <h1>Front 2</h1>
+                        </div>
+                    </div>
+                    <div class="back">
+                        <div id="b2" class="back-content">
+                            <h1>Back 2</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- paper 3 -->
+                <div id="p3" class="paper">
+                    <div class="front">
+                        <div id="f3" class="front-content">
+                            <h1>Front 3</h1>
+                        </div>
+                    </div>
+                    <div class="back">
+                        <div id="b3" class="back-content">
+                            <h1>Back 3</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- paper 4 -->
+                <div id="p4" class="paper">
+                    <div class="front">
+                        <div id="f4" class="front-content">
+                            <h1>Front 4</h1>
+                        </div>
+                    </div>
+                    <div class="back">
+                        <div id="b4" class="back-content">
+                            <h1>Back 4</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Next Button -->
+            <button id="next-btn" class="nav-button">
+                ➡️
+            </button>
+        </div>
+
+        <div class="footer">
+            <!-- 처음으로 돌아가는 버튼 -->
+            <button class="action-button">
+                <img src="Icon/home.png" alt="Home">
+            </button>
+
+            <div class="controls">
+                <button class="control-button">⏪ 5</button>
+                <button class="control-button">⏸️</button>
+                <button class="control-button">⏩ 5</button>
+            </div>
+            <div class="volume-control">
+                <span class="volume-icon">🔉</span>
+                <input type="range" min="0" max="100" value="50">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
