@@ -16,6 +16,8 @@ const paper2 = document.querySelector("#p2");
 const paper3 = document.querySelector("#p3");
 const paper4 = document.querySelector("#p4"); // 추가된 부분
 
+const subtitle = document.getElementById("subtitle"); // 자막 요소 참조
+
 // Event Listener
 prevBtn.addEventListener("click", goPrevPage);
 nextBtn.addEventListener("click", goNextPage);
@@ -41,6 +43,16 @@ function closeBook(isAtBeginning) {
     nextBtn.style.transform = "translateX(0px)";
 }
 
+function updateSubtitle(text) {
+    subtitle.innerText = text;
+
+    // 자막 글자 크기를 조절
+    subtitle.classList.remove("adjust-font");
+    if (subtitle.scrollWidth > subtitle.clientWidth) {
+        subtitle.classList.add("adjust-font");
+    }
+}
+
 function goNextPage() {
     if (currentLocation < maxLocation) {
         switch (currentLocation) {
@@ -48,19 +60,23 @@ function goNextPage() {
                 openBook();
                 paper1.classList.add("flipped");
                 paper1.style.zIndex = 1;
+                updateSubtitle("Front 1");
                 break;
             case 2:
                 paper2.classList.add("flipped");
                 paper2.style.zIndex = 2;
+                updateSubtitle("Front 2");
                 break;
             case 3:
                 paper3.classList.add("flipped");
                 paper3.style.zIndex = 3;
+                updateSubtitle("Front 3");
                 break;
-            case 4: // 추가된 부분
+            case 4:
                 paper4.classList.add("flipped");
                 paper4.style.zIndex = 4;
-                closeBook();
+                closeBook(false);
+                updateSubtitle("Front 4");
                 break;
             default:
                 throw new Error("unknown state");
@@ -76,19 +92,23 @@ function goPrevPage() {
                 closeBook(true);
                 paper1.classList.remove("flipped");
                 paper1.style.zIndex = 4;
+                updateSubtitle("Front 1");
                 break;
             case 3:
                 paper2.classList.remove("flipped");
                 paper2.style.zIndex = 3;
+                updateSubtitle("Front 2");
                 break;
             case 4:
                 paper3.classList.remove("flipped");
                 paper3.style.zIndex = 2;
+                updateSubtitle("Front 3");
                 break;
-            case 5: // 추가된 부분
+            case 5:
                 openBook();
                 paper4.classList.remove("flipped");
                 paper4.style.zIndex = 1;
+                updateSubtitle("Front 4");
                 break;
             default:
                 throw new Error("unknown state");
@@ -96,3 +116,29 @@ function goPrevPage() {
         currentLocation--;
     }
 }
+
+// Pause/Play toggle logic
+const controlButton = document.querySelector('.pause-play-toggle img');
+    
+controlButton.addEventListener('click', () => {
+    if (controlButton.getAttribute('src') === 'Icon/pause.png') {
+        controlButton.setAttribute('src', 'Icon/play.png');
+        controlButton.setAttribute('alt', 'Play');
+    } else {
+        controlButton.setAttribute('src', 'Icon/pause.png');
+        controlButton.setAttribute('alt', 'Pause');
+    }
+});
+
+// Volume/Mute toggle logic
+const volumeIcon = document.getElementById('volume-icon');
+
+volumeIcon.addEventListener('click', () => {
+    if (volumeIcon.getAttribute('src') === 'Icon/volume.png') {
+        volumeIcon.setAttribute('src', 'Icon/mute.png');
+        volumeIcon.setAttribute('alt', 'Mute');
+    } else {
+        volumeIcon.setAttribute('src', 'Icon/volume.png');
+        volumeIcon.setAttribute('alt', 'Volume');
+    }
+});

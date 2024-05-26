@@ -22,7 +22,7 @@
         <div id="content" class="content">
             <!-- previous button -->
             <button id="prev-btn" class="nav-button">
-                ⬅️
+                <img src="Icon/left.png" alt="Left Arrow" class="icon">
             </button>
 
             <!-- 책 -->
@@ -84,9 +84,14 @@
                 </div>
             </div>
 
+                        <!-- 자막 추가 -->
+            <div id="subtitle" class="subtitle">
+                자막이 여기에 표시됩니다.
+            </div>
+
             <!-- Next Button -->
             <button id="next-btn" class="nav-button">
-                ➡️
+                <img src="Icon/right.png" alt="Right Arrow" class="icon">
             </button>
         </div>
 
@@ -97,12 +102,23 @@
             </button>
 
             <div class="controls">
-                <button class="control-button">⏪ 5</button>
-                <button class="control-button">⏸️</button>
-                <button class="control-button">⏩ 5</button>
+                <button class="control-button">
+                    <img src="Icon/backward.png" alt="Backward" class="icon">
+                    5
+                </button>
+                <button class="control-button pause-play-toggle">
+                    <img src="Icon/pause.png" alt="Pause" class="icon">
+                </button>
+                <button class="control-button">
+                    <img src="Icon/forward.png" alt="Forward" class="icon">
+                    5
+                </button>
             </div>
+
             <div class="volume-control">
-                <span class="volume-icon">🔉</span>
+                <span class="volume-icon">
+                    <img src="Icon/volume.png" alt="Volume" id="volume-icon">
+                </span>
                 <input type="range" min="0" max="100" value="50">
             </div>
         </div>
