@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.io.*, java.sql.*, Database.DatabaseConnector" %>
+<%@ page import="java.sql.*, java.util.ArrayList, java.util.List" %>
+<%@ page import="Database.DatabaseConnector" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -56,39 +57,43 @@
 </div>
 
 <%
-    String message = " ";
+    // 세션에서 user_id 가져오기
+    Integer userId = (Integer) request.getSession().getAttribute("user_id");
+
+
+    // 책 표지 이미지 경로를 저장할 리스트
+    List<String> bookCoverPaths = new ArrayList<>();
     Connection con = null;
     PreparedStatement pstmt = null;
-    int Check = 0;
 
     try {
         // DB 연결
         con = DatabaseConnector.getConnection();
-        if (con != null) {
-            message = "데이터베이스에 성공적으로 연결되었습니다.";
-
+        if (con != null && userId != null) {
             // SQL 쿼리 작성
-            String query = "SELECT book_name FROM book WHERE user_id = ?";
+            String query = "SELECT b.book_name, i.cover_image " +
+                    "FROM book b " +
+                    "JOIN image i ON b.book_id = i.book_id " +
+                    "WHERE b.user_id = ?";
 
             // PreparedStatement 생성
             pstmt = con.prepareStatement(query);
 
             // 매개변수 설정
-            pstmt.setString(1, "1");
+            pstmt.setInt(1, userId);
 
             // 쿼리 실행
             ResultSet rs = pstmt.executeQuery();
 
-            String book_name = null;
-            if(rs.next()) {
-                book_name = rs.getString("book_name");
-                //session.setAttribute("book_name", book_name); // 사용자 이름을 세션에 저장
+            while (rs.next()) {
+                String bookName = rs.getString("book_name");
+                String coverImage = rs.getString("cover_image");
+                String imagePath = "image/" + bookName + "/" + coverImage;
+                bookCoverPaths.add(imagePath);
             }
-        } else {
-            Check = 0;
         }
     } catch (SQLException e) {
-        // 오류 처리 및 메시지 설정
+        // 오류 처리
         e.printStackTrace(); // 또는 로그에 오류를 기록합니다.
     } finally {
         // PreparedStatement 및 Connection 닫기
@@ -111,10 +116,13 @@
 
 <script>
     const bookContainer = document.querySelector('.main-content');
-
-    <% if (session.getAttribute("book_name") != null) { %>
     // 예시 이미지 파일 경로
-    const imagePaths = ['image/<%= session.getAttribute("book_name") %>/<%= session.getAttribute("bookCover") %>'];
+    // 책 이미지 파일 경로 배열
+    const imagePaths = [
+        <% for (String imagePath : bookCoverPaths) { %>
+        '<%= imagePath %>',
+        <% } %>
+    ];
 
     // 이미지 파일을 book 클래스에 추가
     imagePaths.forEach(path => {
@@ -127,7 +135,6 @@
         bookDiv.appendChild(img);
         bookContainer.appendChild(bookDiv);
     });
-    <% } %>
 
     // 책 추가 부분
     const addBookBtn = document.querySelector('.add-book');
