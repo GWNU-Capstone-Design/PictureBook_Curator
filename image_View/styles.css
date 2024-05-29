@@ -1,3 +1,4 @@
+/* 브라우저 기본 마진과 패딩 리셋 */
 * {
     margin: 0;
     padding: 0;
@@ -45,68 +46,135 @@ body {
     justify-content: center; /* 수평 중앙 정렬 */
     align-items: center; /* 수직 중앙 정렬 */
     flex-direction: column; /* 세로 방향 정렬 */
-    width: 80%; /* 전체 너비 */
+    width: 100%; /* 전체 너비 */
     height: 80%; /* 전체 높이 */
     position: relative; /* 상대 위치 */
 }
 
-/* 책 설정 */
-.book {
-    /* border: 1px solid black; */
-    position: relative; /* 상대 위치 */
-    width: 60%; /* 너비 300px */
-    height: 60%; /* 높이 60% */
+/* 슬라이드 스타일 */
+.section input[id*="slide"] {
+    display: none;
 }
-
-.paper {
-    position: absolute; /* 절대 위치 */
-    width: 100%; /* 전체 너비 */
-    height: 100%; /* 전체 높이 */
+/* 이미지 크기 변경 */
+.slidewrap {
+    position: absolute;
     top: 0;
     left: 0;
-    perspective: 1500px; /* 3D 효과 적용 */
-    transform-style: preserve-3d; /* 3D 변환 유지 */
-    transition: transform 0.5s; /* 변환 시 애니메이션 적용 */
-}
-
-.front,
-.back {
-    /* border: 1px solid black; */
-    background-color: white; /* 배경색 흰색 */
-    position: absolute; /* 절대 위치 */
-    width: 100%; /* 전체 너비 */
-    height: 100%; /* 전체 높이 */
-    top: 0;
-    left: 0;
-    transform-origin: left; /* 변환 기준점을 왼쪽으로 설정 */
-    transition: transform 0.5s;
-}
-
-.front {
-    z-index: 1; /* 쌓임 순서 설정 */
-    backface-visibility: hidden; /* 뒤쪽 면 숨기기 */
-}
-
-.back {
-    z-index: 0; /* 쌓임 순서 설정 */
-}
-
-.front-content,
-.back-content {
-    width: 100%; /* 전체 너비 */
-    height: 100%; /* 전체 높이 */
+    width: 100%;
+    height: 100%;
     display: flex;
-    justify-content: center; /* 수평 중앙 정렬 */
-    align-items: center; /* 수직 중앙 정렬 */
+    justify-content: center;
+    align-items: center;
 }
 
-.back-content {
-    transform: rotateY(180deg); /* Y축을 기준으로 회전 */
+.section .slidewrap {
+    max-width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
 }
 
-.flipped .front,
-.flipped .back {
-    transform: rotateY(-180deg); /* Y축을 기준으로 회전 */
+.section .slidelist {
+    white-space: nowrap;
+    font-size: 0;
+}
+
+.section .slidelist > li {
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+    transition: all 0.5s;
+}
+
+.section .slidelist > li > a {
+    display: block;
+    position: relative;
+    overflow: hidden; /* 화살표 화면 밖으로 나가면 안 보이도록 overflow로 가림처리 */
+}
+
+.section .slidelist > li > a img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 이미지가 컨테이너의 너비와 높이에 맞춰 축소 */
+
+}
+
+/* 좌우로 넘기는 LABEL버튼에 대한 스타일 */
+.section .slidelist label {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0px;
+    cursor: pointer;
+    width: 50px; /* 화살표 크기를 적당히 설정 */
+    height: 50px; /* 동일한 크기로 설정하여 원형을 유지 */
+    background: rgba(0, 0, 0, 0); /* 초기 배경은 완전 투명 */
+    transition: background-color 0.3s; /* 부드러운 배경색 변경 효과 */
+    border-radius: 50%; /* 원형 모양으로 만듦 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 마우스를 올렸을 때의 스타일 */
+.section .slidelist label:hover {
+    background-color: rgba(0, 0, 0, 0.3); /* 마우스 오버시 반투명 검정색 배경 추가 */
+    opacity: 1; /* 화살표를 보이게 함 */
+}
+
+.section .slidelist .left {
+    left: 50px; /* 화면 왼쪽 가장자리에서 적당히 떨어진 위치 */
+    background: url('./img/left.png') center center / contain no-repeat;
+}
+
+.section .slidelist .right {
+    right: 50px; /* 화면 오른쪽 가장자리에서 적당히 떨어진 위치 */
+    background: url('./img/right.png') center center / contain no-repeat;
+}
+
+/* INPUT이 체크되면 변화값이 li까지 전달되는 스타일 */
+.section input[id="slide01"]:checked ~ .slidewrap .slidelist > li {
+    transform: translateX(0%);
+}
+
+.section input[id="slide02"]:checked ~ .slidewrap .slidelist > li {
+    transform: translateX(-100%);
+}
+
+.section input[id="slide03"]:checked ~ .slidewrap .slidelist > li {
+    transform: translateX(-200%);
+}
+
+/* INPUT이 체크되면 변화값이 LEFT,RIGHT에 전달되는 스타일 */
+.section input[id="slide01"]:checked ~ .slidewrap li:nth-child(1) .left {
+    left: 0px;
+    transition: all 0.35s ease 0.5s;
+}
+
+.section input[id="slide01"]:checked ~ .slidewrap li:nth-child(1) .right {
+    right: 0px;
+    transition: all 0.35s ease 0.5s;
+}
+
+.section input[id="slide02"]:checked ~ .slidewrap li:nth-child(2) .left {
+    left: 0px;
+    transition: all 0.35s ease 0.5s;
+}
+
+.section input[id="slide02"]:checked ~ .slidewrap li:nth-child(2) .right {
+    right: 0px;
+    transition: all 0.35s ease 0.5s;
+}
+
+.section input[id="slide03"]:checked ~ .slidewrap li:nth-child(3) .left {
+    left: 0px;
+    transition: all 0.35s ease 0.5s;
+}
+
+.section input[id="slide03"]:checked ~ .slidewrap li:nth-child(3) .right {
+    right: 0px;
+    transition: all 0.35s ease 0.5s;
 }
 
 /* 버튼 크기 및 제어 */
@@ -119,58 +187,6 @@ button {
     transition: transform 0.5s; /* 변환 시 애니메이션 적용 */
 }
 
-button:focus {
-    outline: none; /* 포커스 시 외곽선 제거 */
-}
-
-button:hover i {
-    color: #636363; /* 호버 시 색상 변경 */
-}
-
-i {
-    font-size: 50px; /* 아이콘 폰트 크기 */
-    color: gray; /* 아이콘 색상 */
-}
-
-/* Paper stack order */
-#p1 {
-    z-index: 4; /* 쌓임 순서 설정 */
-}
-#p2 {
-    z-index: 3; /* 쌓임 순서 설정 */
-}
-#p3 {
-    z-index: 2; /* 쌓임 순서 설정 */
-}
-#p4 {
-    z-index: 1; /* 쌓임 순서 설정 */
-}
-
-.nav-button {
-    font-size: 24px;
-    background: rgba(0, 0, 0, 0.1); /* 반투명 배경색 추가 */
-    color: white; /* 화살표 색상 흰색으로 설정 */
-    border: none;
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    border-radius: 50%; /* 둥근 배경 */
-    padding: 10px; /* 내부 여백 */
-}
-
-.nav-button img.icon {
-    width: 24px; /* 아이콘 너비 */
-    height: 24px; /* 아이콘 높이 */
-}
-
-#prev-btn {
-    left: 10%; /* 왼쪽 위치 */
-}
-
-#next-btn {
-    right: 10%; /* 오른쪽 위치 */
-}
 
 .back-button, .bookmark-button, .action-button {
     background: none; /* 배경 없음 */
@@ -216,10 +232,6 @@ i {
     vertical-align: middle; /* 수직 중앙 정렬 */
 }
 
-.page-number {
-    font-size: 18px; /* 폰트 크기 */
-}
-
 .volume-control {
     display: flex; /* 플렉스 박스 사용 */
     align-items: center; /* 수직 중앙 정렬 */
@@ -241,26 +253,44 @@ i {
 
 /* 자막 스타일 추가 */
 .subtitle {
+    border: 2px solid black;
     position: absolute;
     bottom: 10px; /* 하단에서 약간 위로 띄움 */
-    width: 90%; /* 너비 조정 */
     padding: 5px 10px;
-    background: rgba(0, 0, 0, 0.2); /* 반투명 배경 */
-    color: bla;
+    background: rgba(255, 255, 255, 1); /* 반투명 배경 */
+    color: black; /* 글자 색상 */
     font-size: 1rem;
     text-align: center;
     border-radius: 5px;
     font-weight: bold; /* 글자 두껍게 */
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    max-height: 50px; /* 최대 높이 설정 */
+    white-space: normal; /* 줄 바꿈을 허용 */
+    word-wrap: break-word; /* 긴 단어를 줄 바꿈 */
     max-width: 90%; /* 최대 너비 설정 */
     min-width: 100px; /* 최소 너비 설정 */
     transition: all 0.3s ease-in-out; /* 부드러운 애니메이션 */
+    display: inline-block; /* 텍스트 길이에 맞춰 배경 크기 조정 */
 }
 
 /* 자막의 글자 크기를 조절하는 스타일 추가 */
 .subtitle.adjust-font {
     font-size: calc(1rem + 0.5vw);
 }
+
+.page-info {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: black;
+    margin: 0 30px; /* 좌우 여백을 추가하여 가운데 배치 */
+}
+
+.page-info input[type="number"] {
+    width: 60px;
+    margin-right: 5px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+    font-size: 16px;
+}
+
