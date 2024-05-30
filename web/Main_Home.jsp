@@ -134,6 +134,11 @@
 
         bookDiv.appendChild(img);
         bookContainer.appendChild(bookDiv);
+
+        img.addEventListener('click', () => {
+            window.location.href = 'Viewer.html';
+        });
+
     });
 
     // 책 추가 부분
