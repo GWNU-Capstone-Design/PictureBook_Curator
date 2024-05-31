@@ -1,0 +1,45 @@
+<!DOCTYPE html>   
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="css/styles.css">
+<title>PictureBook Creator</title>
+</head>
+<body>
+
+<div class="header">
+  <div class="title">
+    <a href="new_index.html">
+      <img src="images/pbc_logo2.png" width="300px">
+    </a>
+  </div>
+  <div class="icons">
+    <span class="icon search-icon"></span>
+    <!-- <span class="icon notification-icon"></span> -->
+    <span class="icon settings-icon"></span>
+  </div>
+</div>
+
+<div class="main-content">
+  <div class="add-book">+</div>
+</div>
+
+<div id="addBookModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <form id="bookForm">
+      <label for="bookCover">책 표지:</label>
+      <input type="file" id="bookCover" accept="image/*" onchange="previewCover(this.files)">
+      <div id="coverPreview"></div><br>
+      <label for="bookContent">책 내용:</label>
+      <input type="file" id="bookContent" accept="image/*" multiple onchange="previewContent(this.files)">
+      <div id="contentPreview"></div><br>
+      <button type="submit">책 추가</button>
+    </form>
+  </div>
+</div>
+
+<script src="js/scripts.js"></script>
+</body>
+</html>
