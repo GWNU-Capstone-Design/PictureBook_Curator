@@ -95,6 +95,10 @@ GPTs를 활용하여 이미지 내용을 설명하는 시나리오를 생성합�
 - **web/verificationCode.html** : 이메일 인증 페이지
 - **web/vierifacationCode.jsp** : 이메일 인증을 위한 jsp 파일
 
+### Branch : JJY
+- **flask/app.py** : 이미지 캡셔닝, 사진업로드, gpt, tts 까지의 모든 기능을 통합한 flask 서버 파일
+- **flask/api.py** : 사진을 업로드하면 캡셔닝, gpt, tts의 과정을 거쳐 파일을 제공해주는 api
+
 ### Branch : KTK
 - **Image_Captioning_test.py** : 이미지 캡셔닝 모델을 위한 파이썬 코드
 - **imagefile_chageCSV.py** : 이미지 파일을 읽은 후 이미지 이름에 있는 키워드를 CSV로 작성 후 이름을 숫자로 변경하는 파이썬 코드
