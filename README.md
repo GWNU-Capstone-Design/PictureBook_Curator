@@ -16,6 +16,10 @@ GPTs를 활용하여 이미지 내용을 설명하는 시나리오를 생성합�
 ## 🎞️영상
 
 
+https://github.com/GWNU-Capstone-Design/PictureBook_Curator/assets/114921436/0b052ae8-a8ab-4de0-9f0f-19cd688da816
+
+
+
 ## 🕰️개발 기간
 - 2024.03.04.(월) ~ 2024.05.24.(금)
 - 2024.03.15. 1차 회의: 주제 구체화 선정 및 구체화 회의
