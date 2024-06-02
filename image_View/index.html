@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PictureBook Curator</title>
+    <link rel="stylesheet" href="styles.css"> <!-- 스타일 시트 링크 -->
+    <script src="script.js" defer></script> <!-- 자바스크립트 파일 링크 -->
+</head>
+<body>
+    <div class="container">
+        <!-- 헤더 섹션 -->
+        <div class="header">
+            <button class="back-button">
+                <img src="Icon/back.png" alt="Back">
+            </button>
+            <input type="text" id="title-input" class="title-input" placeholder="책 제목을 입력하세요">
+            <button class="bookmark-button">
+                <img src="Icon/bookmark.png" alt="Bookmark">
+            </button>
+        </div>
+
+        <div id="content" class="content">
+            <!-- 슬라이드 섹션 -->
+            <div class="section">
+                <input type="radio" name="slide" id="slide01" checked>
+                <input type="radio" name="slide" id="slide02">
+                <input type="radio" name="slide" id="slide03">
+
+                <div class="slidewrap">
+                    <ul class="slidelist">
+                        <li>
+                            <a>
+                                <label for="slide03" class="left"></label>
+                                <div class="textbox"></div>
+                                <img src="./Image/dog.jpg" alt="Slide 1">
+                                <label for="slide02" class="right"></label>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <label for="slide01" class="left"></label>
+                                <div class="textbox"></div>
+                                <img src="./Image/testpicture.jpg" alt="Slide 2">
+                                <label for="slide03" class="right"></label>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <label for="slide02" class="left"></label>
+                                <div class="textbox"></div>
+                                <img src="./Image/fox.jpg" alt="Slide 3">
+                                <label for="slide01" class="right"></label>
+                            </a>
+                        </li> 
+                    </ul>
+                </div>
+            </div>
+            <!-- 자막을 표시할 요소 -->
+            <div id="subtitle" class="subtitle">첫번째 슬라이드 입니다. 이 문장은 자막이 길어질 때 어떻게 보이는지 테스트하는 예시 문장입니다.</div>
+        </div>
+
+        <!-- 푸터 섹션 -->
+        <div class="footer">
+            <!-- 처음으로 돌아가는 버튼 -->
+            <button class="action-button">
+                <img src="Icon/home.png" alt="Home">
+            </button>
+
+            <div class="controls">
+                <button class="control-button">
+                    <img src="Icon/backward.png" alt="Backward" class="icon">
+                    5
+                </button>
+                <button class="control-button pause-play-toggle">
+                    <img src="Icon/pause.png" alt="Pause" class="icon">
+                </button>
+                <button class="control-button">
+                    <img src="Icon/forward.png" alt="Forward" class="icon">
+                    5
+                </button>
+            </div>
+
+            <!-- 페이지 정보 표시 및 수정 요소 -->
+            <div class="page-info">
+                <input type="number" id="current-page" value="1" min="1">
+                <span>/</span>
+                <span id="total-pages">3</span>
+            </div>
+
+            <div class="volume-control">
+                <span class="volume-icon">
+                    <img src="Icon/volume.png" alt="Volume" id="volume-icon">
+                </span>
+                <input type="range" min="0" max="100" value="50">
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
