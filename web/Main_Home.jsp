@@ -55,93 +55,69 @@
         </form>
     </div>
 </div>
-
-<%
-    // 세션에서 user_id 가져오기
-    Integer userId = (Integer) request.getSession().getAttribute("user_id");
-
-
-    // 책 표지 이미지 경로를 저장할 리스트
-    List<String> bookCoverPaths = new ArrayList<>();
-    Connection con = null;
-    PreparedStatement pstmt = null;
-
-    try {
-        // DB 연결
-        con = DatabaseConnector.getConnection();
-        if (con != null && userId != null) {
-            // SQL 쿼리 작성
-            String query = "SELECT b.book_name, i.cover_image " +
-                    "FROM book b " +
-                    "JOIN image i ON b.book_id = i.book_id " +
-                    "WHERE b.user_id = ?";
-
-            // PreparedStatement 생성
-            pstmt = con.prepareStatement(query);
-
-            // 매개변수 설정
-            pstmt.setInt(1, userId);
-
-            // 쿼리 실행
-            ResultSet rs = pstmt.executeQuery();
-
-            while (rs.next()) {
-                String bookName = rs.getString("book_name");
-                String coverImage = rs.getString("cover_image");
-                String imagePath = "image/" + bookName + "/" + coverImage;
-                bookCoverPaths.add(imagePath);
-            }
-        }
-    } catch (SQLException e) {
-        // 오류 처리
-        e.printStackTrace(); // 또는 로그에 오류를 기록합니다.
-    } finally {
-        // PreparedStatement 및 Connection 닫기
-        if (pstmt != null) {
-            try {
-                pstmt.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        if (con != null) {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-%>
-
 <script>
-    const bookContainer = document.querySelector('.main-content');
-    // 예시 이미지 파일 경로
-    // 책 이미지 파일 경로 배열
-    const imagePaths = [
-        <% for (String imagePath : bookCoverPaths) { %>
-        '<%= imagePath %>',
-        <% } %>
-    ];
+    // 이미지 경로를 저장할 Set
+    let imagePaths = new Set();
 
-    // 이미지 파일을 book 클래스에 추가
-    imagePaths.forEach(path => {
-        const bookDiv = document.createElement('div');
-        bookDiv.classList.add('book');
+    document.addEventListener('DOMContentLoaded', function() {
+        // 페이지 로드 후 처음 한 번 데이터를 불러옵니다.
+        fetchBookCoverPaths();
 
-        const img = document.createElement('img');
-        img.src = path;
-
-        bookDiv.appendChild(img);
-        bookContainer.appendChild(bookDiv);
-
-        img.addEventListener('click', () => {
-            window.location.href = 'Viewer.html';
-        });
-
+        // 일정 시간 간격으로 데이터를 업데이트합니다.
+        setInterval(fetchBookCoverPaths, 5000); // 5초마다 업데이트
     });
 
-    // 책 추가 부분
+    function fetchBookCoverPaths() {
+        // AJAX를 사용하여 서버로부터 데이터를 요청합니다.
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'MainPageData.jsp', true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    // 요청이 성공적으로 완료되었을 때 데이터를 처리합니다.
+                    var data = JSON.parse(xhr.responseText);
+                    updatePageWithData(data);
+                } else {
+                    // 요청이 실패했을 때 오류를 처리합니다.
+                    console.error('서버에서 오류 발생:', xhr.status);
+                }
+            }
+        };
+        xhr.send();
+    }
+
+    function updatePageWithData(data) {
+        // 받아온 데이터를 사용하여 페이지를 업데이트합니다.
+        displayBookCovers(data);
+    }
+
+    // 책 표지 이미지를 표시하는 함수
+    function displayBookCovers(paths) {
+        const bookContainer = document.querySelector('.main-content');
+
+        paths.forEach(path => {
+            // 이미지 경로가 이미 존재하는지 확인
+            if (!imagePaths.has(path)) {
+                const bookDiv = document.createElement('div');
+                bookDiv.classList.add('book');
+
+                const img = document.createElement('img');
+                img.src = path;
+
+                bookDiv.appendChild(img);
+                bookContainer.appendChild(bookDiv);
+
+                img.addEventListener('click', () => {
+                    window.location.href = 'Viewer.jsp';
+                });
+
+                // 이미지 경로를 Set에 추가
+                imagePaths.add(path);
+            }
+        });
+    }
+
+    // 책 추가 모달 관련 코드
     const addBookBtn = document.querySelector('.add-book');
     const modal = document.getElementById('addBookModal');
     const closeModal = document.querySelector('.close');
@@ -174,20 +150,6 @@
         }
     }
 
-    function previewContent(files) {
-        const preview = document.getElementById('contentPreview');
-        preview.innerHTML = '';
-        Array.from(files).forEach(file => {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                preview.appendChild(img);
-            };
-            reader.readAsDataURL(file);
-        });
-    }
-
     const bookForm = document.getElementById('bookForm');
     bookForm.addEventListener('submit', function(event) {
         //event.preventDefault();
@@ -195,6 +157,5 @@
         this.submit();
     });
 </script>
-
 </body>
 </html>
