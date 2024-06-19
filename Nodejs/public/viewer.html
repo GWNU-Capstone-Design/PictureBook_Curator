@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PictureBook Curator</title>
+    <link rel="icon" type="images/png" href="images/pbc_logo1.png">
+    <link rel="stylesheet" href="css/viewer_styles.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <button class="back-button" onclick="location.href='main.html'">
+                <i class='bx bx-arrow-back'></i>
+            </button>
+            <div id="booktitle">Loading...</div>
+            <button class="bookmark-button">
+                <i class='bx bx-bookmark-plus'></i>
+            </button>
+        </div>
+
+        <!-- Content Section -->
+        <div id="content" class="content">
+            <!-- Slide Section -->
+            <div class="section">
+                <div class="slidewrap">
+                    <ul class="slidelist" id="slider-container">
+                        <!-- Slides will be dynamically inserted here -->
+                    </ul>
+                </div>
+            </div>
+            <!-- Subtitle Element -->
+            <div id="subtitle" class="subtitle"></div>
+        </div>
+
+        <!-- Footer Section -->
+        <div class="footer">
+            <button type="button" class="action-button" onclick="initializeSlider()">재시작</button>
+
+            <div class="controls">
+                <button class="control-button" onclick="changeSlide(-1)">
+                    <i class='bx bx-rewind'></i>
+                </button>
+                <button class="control-button pause-play-toggle" onclick="playPause()">
+                    <i class='bx bx-play-circle' id="ctrlIcon"></i>
+                </button>
+                <button class="control-button" onclick="changeSlide(1)">
+                    <i class='bx bx-fast-forward'></i>
+                </button>
+            </div>
+
+            <div class="page-info">
+                <input type="number" id="current-page" value="1" min="1">
+                <span>/</span>
+                <span id="total-pages"></span>
+            </div>
+
+            <div class="volume-control">
+                <span class="volume-icon">
+                    <i class='bx bx-volume-full'></i>
+                </span>
+                <input type="range" min="0" max="100" value="50" id="volume-slider">
+            </div>
+        </div>
+    </div>
+    <audio id="audio-player" controls style="display: none;"></audio>
+    <script>
+    let slides = [];
+    let currentSlideIndex = 0;
+
+    function initializeSlider() {
+        const sliderContainer = document.getElementById('slider-container');
+        slides = Array.from(sliderContainer.children);
+        if (slides.length > 0) {
+            slides.forEach((slide, index) => {
+                slide.style.display = index === 0 ? 'block' : 'none';
+            });
+            currentSlideIndex = 0; // Reset the slide index
+            document.getElementById('current-page').value = 1;
+            document.getElementById('total-pages').textContent = slides.length;
+            updateSubtitleAndAudio();
+        }
+    }
+
+    function updateSubtitleAndAudio() {
+        const subtitleElement = document.getElementById('subtitle');
+        const audioPlayer = document.getElementById('audio-player');
+        const currentSlide = slides[currentSlideIndex];
+        const caption = currentSlide.querySelector('.caption').innerText;
+        subtitleElement.innerText = caption;
+        const imageUrl = currentSlide.querySelector('img').src;
+        const imageName = imageUrl.substring(imageUrl.lastIndexOf('/') + 1, imageUrl.lastIndexOf('.'));
+        audioPlayer.src = `http://jy.zvz.be:5000/static/audio/${imageName}.mp3`;
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const bookId = urlParams.get('bookId');
+        if (bookId) {
+            fetch(`/getBookDetails/${bookId}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('booktitle').innerText = data.bookName;
+                    const sliderContainer = document.getElementById('slider-container');
+                    sliderContainer.innerHTML = ''; // Clear existing slides
+                    data.images.forEach((image, index) => {
+                        const liElement = document.createElement('li');
+                        const imgElement = document.createElement('img');
+                        imgElement.src = image.imageUrl;
+                        imgElement.alt = 'Book Image';
+                        imgElement.classList.add('responsive-image'); // 이미지에 클래스 추가
+                        liElement.appendChild(imgElement);
+
+                        const captionElement = document.createElement('p');
+                        captionElement.innerText = image.text || ''; // Provide a default empty string
+                        captionElement.classList.add('caption');
+                        liElement.appendChild(captionElement);
+
+                        sliderContainer.appendChild(liElement);
+                    });
+                    initializeSlider();
+                })
+                .catch(error => console.error('Error fetching book details:', error));
+        }
+    });
+
+    function changeSlide(step) {
+        slides[currentSlideIndex].style.display = 'none';
+        currentSlideIndex += step;
+        if (currentSlideIndex >= slides.length) currentSlideIndex = 0;
+        if (currentSlideIndex < 0) currentSlideIndex = slides.length - 1;
+        slides[currentSlideIndex].style.display = 'block';
+        document.getElementById('current-page').value = currentSlideIndex + 1;
+        updateSubtitleAndAudio();
+    }
+
+    function playPause() {
+        const audioPlayer = document.getElementById('audio-player');
+        if (audioPlayer.paused) {
+            audioPlayer.play();
+            document.getElementById('ctrlIcon').classList.replace('bx-play-circle', 'bx-pause-circle');
+        } else {
+            audioPlayer.pause();
+            document.getElementById('ctrlIcon').classList.replace('bx-pause-circle', 'bx-play-circle');
+        }
+    }
+
+    document.getElementById('volume-slider').addEventListener('input', function() {
+        const audioPlayer = document.getElementById('audio-player');
+        audioPlayer.volume = this.value / 100;
+    });
+    </script>
+</body>
+</html>

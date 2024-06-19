@@ -1,0 +1,439 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@font-face {
+    font-family: 'yangjin';
+    src: url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* 모든 요소에 박스 모델 적용 */
+}
+
+body {
+    height: 100vh; /* 화면 전체 높이 */
+    display: flex; /* 플렉스 박스 레이아웃 사용 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    font-family: Arial, sans-serif; /* 폰트 설정 */
+    background-color: #F1F2F9; /* 배경색 설정 */
+}
+
+.container {
+    border: 2px solid #5C6BC0; 
+    border-radius: 25px;
+    width: 90%; /* 너비 80% */
+    height: 90%; /* 높이 80% */
+    display: flex;
+    flex-direction: column; /* 세로 방향 정렬 */
+    justify-content: space-between; /* 공간을 균등하게 분배 */
+    align-items: center; /* 수평 중앙 정렬 */
+    background-color: #fff; /* 배경색 흰색 */
+}
+
+.header, .footer {
+    display: flex;
+    justify-content: space-between; /* 양 끝에 배치 */
+    align-items: center; /* 수직 중앙 정렬 */
+    width: 100%; /* 전체 너비 */
+    padding: 10px; /* 패딩 설정 */
+}
+
+
+.header {
+    border-bottom: 2px solid #5C6BC0;  /* 하단 테두리 */
+}
+
+#booktitle {
+    font-size: 20px;
+    color: #333f85;
+    font-family: 'yangjin', sans-serif;
+}
+
+.footer {
+    border-top: 2px solid #5C6BC0;  /* 상단 테두리 */
+}
+
+.content {
+    display: flex;
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    flex-direction: column; /* 세로 방향 정렬 */
+    width: 80%; /* 전체 너비 */
+    height: 80%; /* 전체 높이 */
+    position: relative; /* 상대 위치 */
+    overflow: hidden; /* 컨텐츠 영역을 벗어나지 않도록 함 */
+}
+
+/* 슬라이드 스타일 */
+.section input[id*="slide"] {
+    display: none;
+}
+/* 이미지 크기 변경 */
+.slidewrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.section .slidewrap {
+    max-width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.section .slidelist {
+    white-space: nowrap;
+    font-size: 0;
+}
+
+.section .slidelist > li {
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+    transition: all 0.5s;
+}
+
+.section .slidelist > li > a {
+    display: block;
+    position: relative;
+    overflow: hidden; /* 화살표 화면 밖으로 나가면 안 보이도록 overflow로 가림처리 */
+}
+
+.section .slidelist > li > a img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 이미지가 컨테이너의 너비와 높이에 맞춰 축소 */
+
+}
+
+/* 좌우로 넘기는 LABEL버튼에 대한 스타일 */
+.section .slidelist label {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0 20px;
+    cursor: pointer;
+    width: auto; /* 화살표 크기를 적당히 설정*/
+    height: 100%;
+    background: rgba(92, 107, 192, .3); /* 초기 배경을 반투명 검정색으로 설정 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* 화살표 이미지가 원래 크기만큼 노출되지 않도록 크기 설정 */
+    background-size: contain;
+    background-repeat: no-repeat; 
+    background-position: center;
+    transition: none !important; /* 모든 트랜지션 제거 */
+}
+
+.section .slidelist label:hover {
+    background-color: rgba(92, 107, 192, .5);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center; 
+    transition: none !important; /* 모든 트랜지션 제거 */
+} 
+
+.section .slidelist .left {
+    left: 0; /* 왼쪽 가장자리 위치 */
+    background-image: url('../images/left.png'); /* 좌측 화살표 이미지 설정 */
+    /* background-size: contain; 
+    background-position: center; */
+}
+
+.section .slidelist .right {
+    right: 0; /* 오른쪽 가장자리 위치 */
+    background-image: url('../images/right.png'); /* 우측 화살표 이미지 설정 */
+    /* background-size: contain; 
+    background-position: center; */
+}
+
+/* INPUT이 체크되면 변화값이 li까지 전달되는 스타일 */
+.section input[id="slide01"]:checked ~ .slidewrap .slidelist > li {
+    transform: translateX(0%);
+}
+
+.section input[id="slide02"]:checked ~ .slidewrap .slidelist > li {
+    transform: translateX(-100%);
+}
+
+.section input[id="slide03"]:checked ~ .slidewrap .slidelist > li {
+    transform: translateX(-200%);
+}
+
+/* INPUT이 체크되면 변화값이 LEFT,RIGHT에 전달되는 스타일 */
+.section input[id="slide01"]:checked ~ .slidewrap li:nth-child(1) .left {
+    left: 0px;
+    transition: all 0.35s ease 0.5s;
+}
+
+.section input[id="slide01"]:checked ~ .slidewrap li:nth-child(1) .right {
+    right: 0px;
+    transition: all 0.35s ease 0.5s;
+}
+
+.section input[id="slide02"]:checked ~ .slidewrap li:nth-child(2) .left {
+    left: 0px;
+    transition: all 0.35s ease 0.5s;
+}
+
+.section input[id="slide02"]:checked ~ .slidewrap li:nth-child(2) .right {
+    right: 0px;
+    transition: all 0.35s ease 0.5s;
+}
+
+.section input[id="slide03"]:checked ~ .slidewrap li:nth-child(3) .left {
+    left: 0px;
+    transition: all 0.35s ease 0.5s;
+}
+
+.section input[id="slide03"]:checked ~ .slidewrap li:nth-child(3) .right {
+    right: 0px;
+    transition: all 0.35s ease 0.5s;
+}
+
+/* 버튼 크기 및 제어 */
+button {
+    border: none; /* 테두리 제거 */
+    background-color: transparent; /* 배경색 투명 */
+    cursor: pointer; /* 커서 모양 변경 */
+    margin: 0; /* 여백 설정 */
+    font-size: 25px;
+    transition: transform 0.5s; /* 변환 시 애니메이션 적용 */
+}
+
+
+.back-button, .bookmark-button { 
+    font-size: 30px; /* 폰트 크기 */
+    cursor: pointer; /* 커서 모양 변경 */
+    display: flex; /* 플렉스 박스 사용 */
+    align-items: center; /* 수직 중앙 정렬 */
+    color: #5C6BC0;
+}
+.action-button {
+    font-size: 16px;
+    cursor: pointer;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    background-color: #5C6BC0;
+    width: 80px;
+    height: 40px;
+    border-radius: 50px;
+    font-family: 'yangjin', sans-serif;
+}
+
+.controls {
+    display: flex; /* 플렉스 박스 사용 */
+    justify-content: center; /* 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    flex-grow: 1; /* 남는 공간 차지 */
+}
+
+.control-button {
+    margin: 0 10px; 
+    background: none; 
+    border: none; 
+    font-size: 50px;
+    cursor: pointer;
+    color: #5C6BC0;
+    display: flex; 
+    align-items: center; 
+}
+
+.page-info {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: #333f85;
+    font-family: 'yangjin', sans-serif;
+    margin: 0 30px; /* 좌우 여백을 추가하여 가운데 배치 */
+}
+
+.page-info input[type="number"] {
+    width: 60px;
+    margin-right: 5px;
+    text-align: center;
+    border: 1px solid rgba(92, 107, 192, .4);
+    border-radius: 30px;
+    padding: 5px;
+    font-size: 12px;
+    color: #333f85;
+    font-family: 'yangjin', sans-serif;
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+}
+
+.volume-icon {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.bx-volume-full, .bx-volume-mute {
+    font-size: 25px;
+    color: #5C6BC0;
+}
+
+.volume-control input {
+    cursor: pointer;
+}
+
+#progress, #vol {
+    -webkit-appearance: none;  
+    height: 8px;
+    background: rgba(92, 107, 192, .3);
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 40px 0;
+}
+#progress {
+    width: 50%;
+    margin-right: 20px;
+}
+
+#vol {
+    width: 100%;
+}
+
+#progress::-webkit-slider-thumb, #vol::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background: #5C6BC0; 
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 8px solid #fff;
+    box-shadow: 0 5px 5px rgba(92, 107, 192, 0.22);
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.controls div {
+    width: 45px;
+    height: 45px;
+    margin: 20px;
+    background: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #5C6BC0;
+    box-shadow: 0 10px 20px rgba(92, 107, 192, 0.22);
+    cursor: pointer;
+    font-size: 35px;
+}
+
+.controls div:nth-child(2) {
+    transform: scale(1.5);
+    background: #5C6BC0;
+    color: #fff;
+}
+
+/* 자막 스타일 추가 */
+.subtitle {
+    border: 2px solid #5C6BC0;
+    position: absolute;
+    bottom: 10px; /* 하단에서 약간 위로 띄움 */
+    padding: 5px 10px;
+    background: rgba(255, 255, 255, 1); /* 반투명 배경 */
+    color: #333f85; /* 글자 색상 */
+    font-size: 1rem;
+    text-align: center;
+    border-radius: 30px;
+    font-weight: bold;   
+    white-space: normal; /* 줄 바꿈을 허용 */
+    word-wrap: break-word; /* 긴 단어를 줄 바꿈 */
+    max-width: 90%; /* 최대 너비 설정 */
+    min-width: 100px; /* 최소 너비 설정 */
+    transition: all 0.3s ease-in-out; /* 부드러운 애니메이션 */
+    display: inline-block; /* 텍스트 길이에 맞춰 배경 크기 조정 */
+}
+
+/* 자막의 글자 크기를 조절하는 스타일 추가 */
+.subtitle.adjust-font {
+    font-size: calc(1rem + 0.5vw);
+}
+
+@media screen and (max-width: 768px) {
+    /* 화면 너비가 768px 이하일 때 적용될 스타일 */
+    .footer {
+        flex-direction: column;
+        align-items: center;
+        padding: 5px 0; /* 상하 패딩 줄임 */
+    }
+    #progress {
+        width: 80%;
+        margin: 2px 0;
+    }
+
+    /* 추가된 부분: controls와 progress 사이 간격 조정 */
+    .controls {
+        margin-bottom: 10px; /* controls와 progress 사이 간격 조정 */
+    }
+}
+
+.image-slider {
+    position: relative;
+    width: 100%;
+    overflow: hidden;  /* Prevent images from spilling out */
+}
+
+.control {
+    position: absolute;
+    top: 50%; /* 컨트롤 버튼을 수직 중앙에 위치 */
+    transform: translateY(-50%); /* 정확한 중앙 위치 조정 */
+    z-index: 10; /* 컨트롤 버튼이 이미지 위에 오도록 z-index 설정 */
+    background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
+    color: white; /* 아이콘 색상 */
+    font-size: 30px; /* 아이콘 크기 */
+    padding: 10px; /* 패딩 */
+    border: none; /* 테두리 제거 */
+    cursor: pointer; /* 커서 모양 변경 */
+}
+
+.left {
+    left: 10px;
+}
+
+.right {
+    right: 10px;
+}
+
+.image-container {
+    width: 100%; /* 컨테이너의 너비를 100%로 설정 */
+    height: 500px; /* 예시로 높이를 500px로 설정, 필요에 따라 조정 */
+    overflow: hidden; /* 컨테이너 범위를 벗어나는 내용은 숨김 */
+    position: relative; /* 상대 위치 */
+    display: flex; /* flexbox를 사용하여 이미지를 중앙에 배치 */
+    justify-content: center; /* 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+}
+
+.slide {
+    width: 100%; /* 슬라이드 이미지의 너비를 컨테이너에 맞춤 */
+    height: auto; /* 높이는 자동으로 설정하여 비율 유지 */
+    max-height: 100%; /* 최대 높이는 컨테이너 높이에 맞춤 */
+    object-fit: contain; /* 이미지 비율을 유지하면서 최적의 크기로 조정 */
+}
+
+.responsive-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain; /* 이미지 비율을 유지하면서 최적의 크기로 조정 */
+}
