@@ -18,10 +18,10 @@ CORS(app, resources={r"/static/audio/*": {"origins": "*"}})  # CORS 설정 추�
 def serve_audio(filename):
     return send_from_directory('static/audio', filename)
 
-openai_client = OpenAI(api_key="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")
+openai_client = OpenAI(api_key="")
 
 # Google authentication settings
-tts_client = texttospeech.TextToSpeechClient.from_service_account_json('./nth-transformer-420210-02d1185d9547.json')
+tts_client = texttospeech.TextToSpeechClient.from_service_account_json('')
 
 # Directory settings
 UPLOAD_FOLDER = os.path.join('static', 'uploads')
