@@ -20,29 +20,23 @@ CREATE TABLE `Book` (
 CREATE TABLE `Image` (
     `image_id` INT NOT NULL AUTO_INCREMENT,
     `book_id` INT NOT NULL,
-    `image_value` VARCHAR(255) NOT NULL,
+    `image_value_1` VARCHAR(255) NOT NULL,
+    `image_value_2` VARCHAR(255) NOT NULL,
+    `image_value_3` VARCHAR(255) NOT NULL,
+    `image_value_4` VARCHAR(255) NOT NULL,
+    `image_value_5` VARCHAR(255) NOT NULL,
+    `image_value_6` VARCHAR(255) NOT NULL,
+    `image_value_7` VARCHAR(255) NOT NULL,
+    `image_value_8` VARCHAR(255) NOT NULL,
+    `image_value_9` VARCHAR(255) NOT NULL,
     PRIMARY KEY (`image_id`),
-    FOREIGN KEY (`book_id`) REFERENCES `Book` (`book_id`)
-);
-
-CREATE TABLE `Text` (
-    `text_id` INT NOT NULL,
-    `image_id` INT NOT NULL,
-    `book_id` INT NOT NULL,
-    `text_value` JSON,
-    PRIMARY KEY (`text_id`, `image_id`, `book_id`),
-    FOREIGN KEY (`image_id`) REFERENCES `Image` (`image_id`),
     FOREIGN KEY (`book_id`) REFERENCES `Book` (`book_id`)
 );
 
 CREATE TABLE `Scenario` (
     `scenario_id` INT NOT NULL AUTO_INCREMENT,
-    `text_id` INT NOT NULL,
     `image_id` INT NOT NULL,
-    `book_id` INT NOT NULL,
     `scenario_value` TEXT NOT NULL,
     PRIMARY KEY (`scenario_id`),
-    FOREIGN KEY (`text_id`) REFERENCES `Text` (`text_id`),
-    FOREIGN KEY (`image_id`) REFERENCES `Image` (`image_id`),
-    FOREIGN KEY (`book_id`) REFERENCES `Book` (`book_id`)
+    FOREIGN KEY (`image_id`) REFERENCES `Image` (`image_id`)
 );
