@@ -20,11 +20,9 @@ https://github.com/GWNU-Capstone-Design/PictureBook_Curator/assets/114921436/73f
 
 
 
-
-
-
 ## 🛠️실행 과정
 
+![Group 1](https://github.com/GWNU-Capstone-Design/PictureBook_Curator/assets/114921436/d600b704-d832-4924-a8f1-6380dda543f7)
 
 
 ## 🕰️개발 기간
