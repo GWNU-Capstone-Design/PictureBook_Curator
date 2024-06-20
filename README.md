@@ -16,7 +16,11 @@ GPTs를 활용하여 이미지 내용을 설명하는 시나리오를 생성합�
 ## 🎞️영상
 
 
-https://github.com/GWNU-Capstone-Design/PictureBook_Curator/assets/114921436/6062330c-9258-4da1-ac31-db8eac923454
+https://github.com/GWNU-Capstone-Design/PictureBook_Curator/assets/114921436/73fab9bf-b911-4854-b59e-c975299beb90
+
+
+
+
 
 
 ## 🛠️실행 과정
